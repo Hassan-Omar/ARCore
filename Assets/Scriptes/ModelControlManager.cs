@@ -8,22 +8,22 @@ public class ModelControlManager : MonoBehaviour
     public void increaseRotation()
     {
         updatetransformOfLastModel();
-        transformOfLastModel.Rotate(transform.up * 5);
+        transformOfLastModel.Rotate(transform.up *2.5f);
     }
     public void decreaseRotation()
     {
         updatetransformOfLastModel();
-        transformOfLastModel.Rotate(-transform.up * 5);
+        transformOfLastModel.Rotate(-transform.up *2.5f);
     }
     public void increaseScale()
     {
         updatetransformOfLastModel();
-        transformOfLastModel.localScale += Vector3.one * 0.15f;
+        transformOfLastModel.localScale += Vector3.one* Time.deltaTime * 0.15f;
     }
     public void decreaseScale()
     {
         updatetransformOfLastModel();
-        transformOfLastModel.localScale -= Vector3.one * 0.15f;
+        transformOfLastModel.localScale -= Vector3.one* Time.deltaTime* 0.15f;
     }
     private void updatetransformOfLastModel()
     {
