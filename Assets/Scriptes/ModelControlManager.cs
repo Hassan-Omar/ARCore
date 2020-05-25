@@ -1,30 +1,66 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class ModelControlManager : MonoBehaviour
 {
-    Transform transformOfLastModel; 
+    Transform transformOfLastModel;
+    [SerializeField] Text Rtext,Stext;
+
+    /// <summary>
+    ///  Increase transformOfLastModel Rotation 
+    /// </summary>
     public void increaseRotation()
     {
         updatetransformOfLastModel();
-        transformOfLastModel.Rotate(transform.up *2.5f);
+        transformOfLastModel.Rotate(transformOfLastModel.up *2.5f);
+        updateRotationTXT(transformOfLastModel.localEulerAngles.y);
     }
+    /// <summary>
+    ///  Decrease transformOfLastModel Rotation 
+    /// </summary>
     public void decreaseRotation()
     {
         updatetransformOfLastModel();
-        transformOfLastModel.Rotate(-transform.up *2.5f);
+        transformOfLastModel.Rotate(-transformOfLastModel.up *2.5f);
+        updateRotationTXT(transformOfLastModel.localEulerAngles.y);
+
     }
+    /// <summary>
+    ///  Increase transformOfLastModel Scale 
+    /// </summary>
     public void increaseScale()
     {
         updatetransformOfLastModel();
         transformOfLastModel.localScale += Vector3.one* Time.deltaTime * 0.15f;
+        updateScaleTXT(transformOfLastModel.localScale.y);
+
     }
+    /// <summary>
+    ///  Decrease transformOfLastModel Rotation 
+    /// </summary>
     public void decreaseScale()
     {
         updatetransformOfLastModel();
         transformOfLastModel.localScale -= Vector3.one* Time.deltaTime* 0.15f;
+        updateScaleTXT(transformOfLastModel.localScale.y);
     }
+
+    //______________________________________________________________________
+    // Comming 2 Functions to Update the TEXT ON UI 
+    private void updateRotationTXT(float val)
+    {
+        Rtext.text = System.Math.Round(val, 2) + "";
+    }
+    private void updateScaleTXT(float val)
+    {
+        Stext.text = System.Math.Round(val, 3)+"";
+    }
+    //______________________________________________________________________
+
+
+    /// <summary>
+    /// Function to Update transformOfLastModel property 
+    /// </summary>
     private void updatetransformOfLastModel()
     {
         // assign New Value 
