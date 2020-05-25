@@ -5,7 +5,7 @@ public class DestroyBlink : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
+        StartCoroutine("disable");
 	}
 
     IEnumerator disable()
