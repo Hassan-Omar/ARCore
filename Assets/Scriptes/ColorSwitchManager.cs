@@ -4,6 +4,7 @@ public class ColorSwitchManager : MonoBehaviour
 {
     [SerializeField]private GameObject selectModel; 
     [SerializeField]private ObjectSpawner objectSpawner; 
+
     /// <summary>
     /// Function to Switch the Muterial on Current Selected Model
     /// </summary>
@@ -15,7 +16,6 @@ public class ColorSwitchManager : MonoBehaviour
             Material[] mats = objectSpawner.LastCreatedObject.GetComponentInChildren<MeshRenderer>().materials;
             mats[0] = targetMaterial;
             objectSpawner.LastCreatedObject.GetComponentInChildren<MeshRenderer>().materials= mats;
-            Debug.Log(objectSpawner.LastCreatedObject.GetComponentInChildren<MeshRenderer>().materials[0].name + "________"+targetMaterial.name+"_______" + objectSpawner.LastCreatedObject.name);
             selectModel.SetActive(false);
          }
         else

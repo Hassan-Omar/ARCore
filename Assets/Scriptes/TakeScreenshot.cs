@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class TakeScreenshot : MonoBehaviour {
 
-    [SerializeField]
-    GameObject blink;
-    [SerializeField]
-    GameObject RightPanel;
+    [SerializeField] GameObject blink;
+    [SerializeField] GameObject RightPanel;
+    [SerializeField] GameObject PlacementIndicator;
 
     public void TakeAShot()
 	{
         RightPanel.SetActive(false);
-        StartCoroutine ("CaptureIt");
+        PlacementIndicator.SetActive(false);
+        StartCoroutine("CaptureIt");
 	}
 
 	IEnumerator CaptureIt()
@@ -24,7 +24,7 @@ public class TakeScreenshot : MonoBehaviour {
         blink.SetActive(true);
         blink.GetComponent<DestroyBlink>().disableBlink();
         RightPanel.SetActive(true);
-
+        PlacementIndicator.SetActive(true);
     }
 
 }
