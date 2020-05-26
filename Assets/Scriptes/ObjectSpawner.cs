@@ -6,11 +6,11 @@ public class ObjectSpawner : MonoBehaviour
 {
     
     public GameObject[] objectsToSpawn;
-    private PlacementIndicator placementIndicator;
+   [SerializeField] private GameObject placementIndicator;
     public GameObject LastCreatedObject; 
     private void Start()
     {
-        placementIndicator = FindObjectOfType<PlacementIndicator>();
+        //placementIndicator = FindObjectOfType<PlacementIndicator>();
     }
 
     /*private void Update()

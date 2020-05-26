@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public class ModelControlManager : MonoBehaviour
 {
     Transform transformOfLastModel;
-    [SerializeField] Text Rtext,Stext;
+    [SerializeField] Text Rtext, Stext;
+    [SerializeField] GameObject selectModel;
     [SerializeField] private ObjectSpawner objectSpawner;
 
     /// <summary>
@@ -12,28 +13,34 @@ public class ModelControlManager : MonoBehaviour
     /// </summary>
     public void increaseRotation()
     {
-        updatetransformOfLastModel();
-        transformOfLastModel.Rotate(transformOfLastModel.up *2.5f);
-        updateRotationTXT(transformOfLastModel.localEulerAngles.y);
+        if (updatetransformOfLastModel())
+        {
+
+            transformOfLastModel.Rotate(transformOfLastModel.up * 2.5f);
+            updateRotationTXT(transformOfLastModel.localEulerAngles.y);
+        }
     }
     /// <summary>
     ///  Decrease transformOfLastModel Rotation 
     /// </summary>
     public void decreaseRotation()
     {
-        updatetransformOfLastModel();
-        transformOfLastModel.Rotate(-transformOfLastModel.up *2.5f);
-        updateRotationTXT(transformOfLastModel.localEulerAngles.y);
-
+        if (updatetransformOfLastModel())
+        {
+            transformOfLastModel.Rotate(-transformOfLastModel.up * 2.5f);
+            updateRotationTXT(transformOfLastModel.localEulerAngles.y);
+        }
     }
     /// <summary>
     ///  Increase transformOfLastModel Scale 
     /// </summary>
     public void increaseScale()
     {
-        updatetransformOfLastModel();
-        transformOfLastModel.localScale += Vector3.one* Time.deltaTime * 0.15f;
-        updateScaleTXT(transformOfLastModel.localScale.y);
+        if (updatetransformOfLastModel())
+        {
+            transformOfLastModel.localScale += Vector3.one * Time.deltaTime * 0.15f;
+            updateScaleTXT(transformOfLastModel.localScale.y);
+        }
 
     }
     /// <summary>
@@ -41,9 +48,11 @@ public class ModelControlManager : MonoBehaviour
     /// </summary>
     public void decreaseScale()
     {
-        updatetransformOfLastModel();
-        transformOfLastModel.localScale -= Vector3.one* Time.deltaTime* 0.15f;
-        updateScaleTXT(transformOfLastModel.localScale.y);
+        if (updatetransformOfLastModel())
+        {
+            transformOfLastModel.localScale -= Vector3.one * Time.deltaTime * 0.15f;
+            updateScaleTXT(transformOfLastModel.localScale.y);
+        }
     }
 
     //______________________________________________________________________
@@ -62,9 +71,19 @@ public class ModelControlManager : MonoBehaviour
     /// <summary>
     /// Function to Update transformOfLastModel property 
     /// </summary>
-    private void updatetransformOfLastModel()
+    private bool updatetransformOfLastModel()
     {
-        // assign New Value 
-        this.transformOfLastModel = objectSpawner.LastCreatedObject.transform; 
+        if (transformOfLastModel != null)
+        {
+            // assign New Value 
+            this.transformOfLastModel = objectSpawner.LastCreatedObject.transform;
+            selectModel.SetActive(false);
+            return true;
+        }
+        else
+        {
+            selectModel.SetActive(true);
+            return false;
+        }
     }
 }
