@@ -73,7 +73,7 @@ public class ModelControlManager : MonoBehaviour
     /// </summary>
     private bool updatetransformOfLastModel()
     {
-        if (transformOfLastModel != null)
+        if (objectSpawner.LastCreatedObject != null)
         {
             // assign New Value 
             this.transformOfLastModel = objectSpawner.LastCreatedObject.transform;
@@ -83,6 +83,7 @@ public class ModelControlManager : MonoBehaviour
         else
         {
             selectModel.SetActive(true);
+            selectModel.GetComponent<DestroyBlink>().disableBlink();
             return false;
         }
     }

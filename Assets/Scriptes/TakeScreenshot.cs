@@ -22,6 +22,7 @@ public class TakeScreenshot : MonoBehaviour {
 		ScreenCapture.CaptureScreenshot(pathToSave);
 		yield return new WaitForEndOfFrame();
         blink.SetActive(true);
+        blink.GetComponent<DestroyBlink>().disableBlink();
         RightPanel.SetActive(true);
 
     }

@@ -7179,6 +7179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 313c484875606ed458cdb3b7b7c8c443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectModel: {fileID: 2050186094}
   objectSpawner: {fileID: 1784893902}
 --- !u!1 &1530981091
 GameObject:

@@ -4,13 +4,13 @@ using System.Collections;
 public class DestroyBlink : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
+	public void disableBlink() {
         StartCoroutine("disable");
 	}
 
     IEnumerator disable()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.7f);
         gameObject.SetActive(false);
     }
 }
