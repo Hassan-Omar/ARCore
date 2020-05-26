@@ -2,12 +2,13 @@
 
 public class ColorSwitchManager : MonoBehaviour
 {
+    public GameObject lastGeneratedObject; 
     /// <summary>
     /// Function to Switch the Muterial on Current Selected Model
     /// </summary>
     /// <param name="id"> id of target material</param>
-    public void switchToMaterialByID(int id)
+    public void switchToMaterialByID(Material targetMaterial)
     {
-
+        lastGeneratedObject.GetComponent<MeshRenderer>().materials[0] = targetMaterial; 
     }
 }
