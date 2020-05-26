@@ -5,6 +5,7 @@ public class ModelControlManager : MonoBehaviour
 {
     Transform transformOfLastModel;
     [SerializeField] Text Rtext,Stext;
+    [SerializeField] private ObjectSpawner objectSpawner;
 
     /// <summary>
     ///  Increase transformOfLastModel Rotation 
@@ -64,6 +65,6 @@ public class ModelControlManager : MonoBehaviour
     private void updatetransformOfLastModel()
     {
         // assign New Value 
-        this.transformOfLastModel = GameObject.Find("7777").transform;
+        this.transformOfLastModel = objectSpawner.LastCreatedObject.transform; 
     }
 }

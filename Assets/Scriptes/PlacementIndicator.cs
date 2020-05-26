@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
+/// <summary>
+/// This Script To View A Mark On The Serface 
+/// </summary>
 public class PlacementIndicator : MonoBehaviour
 {
     private ARRaycastManager rayManager;
