@@ -14,7 +14,7 @@ public class SelectObject : MonoBehaviour
 
     private Material selectedObjPrvMaterial;
     private GameObject selectedObj;
-    private Vector3 offSet;
+
     public bool isOverTaggedElement = false;
     private bool multiCallBlocker = true;
 
@@ -24,7 +24,7 @@ public class SelectObject : MonoBehaviour
 
             if (!IsPointerOverUIObject())
             {
-                moveObj();
+                selctObject();
                 if (Input.GetTouch(0).tapCount > 1)
                 {
                     deleteSelectedObject();
@@ -35,7 +35,7 @@ public class SelectObject : MonoBehaviour
         }
     }
 
-    private void moveObj()
+    private void selctObject()
     {
         if (Input.touchCount >0)
         {
@@ -54,19 +54,7 @@ public class SelectObject : MonoBehaviour
                     {
                         selectedObjPrvMaterial = objectSpawner.LastCreatedObject.GetComponentInChildren<MeshRenderer>().material;
                         colorManager.switchToMaterial(selectionMaterial);
-                        offSet = selectedObj.transform.position - ray.origin;
                     }
-                }
-            }
-            else if (touch.phase == TouchPhase.Moved)
-            {
-                if (selectedObj != null)
-                {
-                    /*
-                    Vector3 newPosition=arCameera.ScreenToWorldPoint(Input.GetTouch(0).position);
-                    selectedObj.transform.position = new Vector3(newPosition.x, 0, -newPosition.z);*/
-                    selectedObj.transform.position = Vector3.Lerp(selectedObj.transform.position,
-                        new Vector3(ray.origin.x + offSet.x, selectedObj.transform.position.y, ray.origin.z + offSet.z), 1);
                 }
             }
             else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
@@ -77,7 +65,6 @@ public class SelectObject : MonoBehaviour
                 }
             }
             
-
         }
     }
 
