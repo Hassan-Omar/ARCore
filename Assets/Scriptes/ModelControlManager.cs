@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class ModelControlManager : MonoBehaviour
 {
-    Transform transformOfLastModel;
     [SerializeField] Text Rtext, Stext;
     [SerializeField] GameObject selectModel;
     [SerializeField] private ObjectSpawner objectSpawner;
@@ -13,11 +12,10 @@ public class ModelControlManager : MonoBehaviour
     /// </summary>
     public void increaseRotation()
     {
-        if (updatetransformOfLastModel())
+        if (checkIfObjSelected())
         {
-
-            transformOfLastModel.Rotate(transformOfLastModel.up * 2.5f);
-            updateRotationTXT(transformOfLastModel.localEulerAngles.y);
+            objectSpawner.LastCreatedObject.transform.Rotate(objectSpawner.transform.up*0.5f);
+            updateRotationTXT(objectSpawner.LastCreatedObject.transform.localEulerAngles.y);
         }
     }
     /// <summary>
@@ -25,10 +23,10 @@ public class ModelControlManager : MonoBehaviour
     /// </summary>
     public void decreaseRotation()
     {
-        if (updatetransformOfLastModel())
+        if (checkIfObjSelected())
         {
-            transformOfLastModel.Rotate(-transformOfLastModel.up * 2.5f);
-            updateRotationTXT(transformOfLastModel.localEulerAngles.y);
+            objectSpawner.LastCreatedObject.transform.Rotate(-objectSpawner.transform.up*0.5f);
+            updateRotationTXT(objectSpawner.LastCreatedObject.transform.localEulerAngles.y);
         }
     }
     /// <summary>
@@ -36,10 +34,10 @@ public class ModelControlManager : MonoBehaviour
     /// </summary>
     public void increaseScale()
     {
-        if (updatetransformOfLastModel())
+        if (checkIfObjSelected())
         {
-            transformOfLastModel.localScale += Vector3.one * Time.deltaTime * 0.15f;
-            updateScaleTXT(transformOfLastModel.localScale.y);
+            objectSpawner.LastCreatedObject.transform.localScale += Vector3.one * Time.deltaTime * 0.15f;
+            updateScaleTXT(objectSpawner.LastCreatedObject.transform.localScale.y);
         }
 
     }
@@ -48,10 +46,10 @@ public class ModelControlManager : MonoBehaviour
     /// </summary>
     public void decreaseScale()
     {
-        if (updatetransformOfLastModel())
+        if (checkIfObjSelected())
         {
-            transformOfLastModel.localScale -= Vector3.one * Time.deltaTime * 0.15f;
-            updateScaleTXT(transformOfLastModel.localScale.y);
+            objectSpawner.LastCreatedObject.transform.localScale -= Vector3.one * Time.deltaTime * 0.15f;
+            updateScaleTXT(objectSpawner.LastCreatedObject.transform.localScale.y);
         }
     }
 
@@ -63,7 +61,7 @@ public class ModelControlManager : MonoBehaviour
     }
     private void updateScaleTXT(float val)
     {
-        Stext.text = System.Math.Round(val, 3)+"";
+        Stext.text = System.Math.Round(val, 2)+"";
     }
     //______________________________________________________________________
 
@@ -71,12 +69,10 @@ public class ModelControlManager : MonoBehaviour
     /// <summary>
     /// Function to Update transformOfLastModel property 
     /// </summary>
-    private bool updatetransformOfLastModel()
+    private bool checkIfObjSelected()
     {
         if (objectSpawner.LastCreatedObject != null)
-        {
-            // assign New Value 
-            this.transformOfLastModel = objectSpawner.LastCreatedObject.transform;
+        { 
             selectModel.SetActive(false);
             return true;
         }

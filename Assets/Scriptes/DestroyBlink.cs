@@ -10,7 +10,7 @@ public class DestroyBlink : MonoBehaviour {
 
     IEnumerator disable()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
     }
 }

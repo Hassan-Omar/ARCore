@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class SelectObject : MonoBehaviour
-{
-    private Vector2 touchPosition;
+{ 
     [SerializeField] private Camera arCameera;
     [SerializeField] private ObjectSpawner objectSpawner;
     [SerializeField] private ColorSwitchManager colorManager;
@@ -13,14 +12,14 @@ public class SelectObject : MonoBehaviour
     [SerializeField] private GameObject confirmDeltePanel;
 
     private Material selectedObjPrvMaterial;
-    private GameObject selectedObj;
 
     public bool isOverTaggedElement = false;
     private bool multiCallBlocker = true;
 
     private void Update()
     {
-        if (Input.touchCount > 0) { 
+        if (Input.touchCount > 0)
+        { 
 
             if (!IsPointerOverUIObject())
             {
@@ -29,9 +28,7 @@ public class SelectObject : MonoBehaviour
                 {
                     deleteSelectedObject();
                 }
-            }
-
-            
+            }           
         }
     }
 
@@ -40,16 +37,14 @@ public class SelectObject : MonoBehaviour
         if (Input.touchCount >0)
         {
             Touch touch = Input.GetTouch(0);
-            touchPosition = touch.position;
-
+ 
             Ray ray = arCameera.ScreenPointToRay(touch.position);
             if (touch.phase == TouchPhase.Began)
             {
                 RaycastHit hitObject;
                 if (Physics.Raycast(ray, out hitObject))
                 {
-                    selectedObj = hitObject.transform.gameObject;
-                    objectSpawner.LastCreatedObject = selectedObj;
+                    objectSpawner.LastCreatedObject = hitObject.transform.gameObject; ;
                     if (objectSpawner.LastCreatedObject != null)
                     {
                         selectedObjPrvMaterial = objectSpawner.LastCreatedObject.GetComponentInChildren<MeshRenderer>().material;
@@ -57,9 +52,9 @@ public class SelectObject : MonoBehaviour
                     }
                 }
             }
-            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            else if (touch.phase == TouchPhase.Ended)
             {
-                if (selectedObj != null)
+                if (objectSpawner.LastCreatedObject != null)
                 {
                     colorManager.switchToMaterial(selectedObjPrvMaterial);
                 }
@@ -70,7 +65,7 @@ public class SelectObject : MonoBehaviour
 
     public void deleteSelectedObject()
     {
-        if (selectedObj != null)
+        if (objectSpawner.LastCreatedObject != null)
         {
             confirmDeltePanel.SetActive(true);
         }
@@ -78,7 +73,7 @@ public class SelectObject : MonoBehaviour
 
     IEnumerator resetModelMaterial()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         colorManager.switchToMaterial(selectedObjPrvMaterial);
     }
 
@@ -96,7 +91,7 @@ public class SelectObject : MonoBehaviour
     {
         if(decision)
         {
-            Destroy(selectedObj);
+            Destroy(objectSpawner.LastCreatedObject);
         }
     }
 }
