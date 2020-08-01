@@ -8,39 +8,46 @@ public class TakeScreenshot : MonoBehaviour {
     [SerializeField] GameObject blink;
     [SerializeField] GameObject RightPanel;
     [SerializeField] GameObject PlacementIndicator;
- 
+    [SerializeField] GameObject InformationsPanel;
+    [SerializeField] ObjectSpawner objectSpawner;
+    [SerializeField] ColorSwitchManager colorSwitchManager;
+    private Material material; 
     private void Start()
     {
-        if (!File.Exists(GetAndroidExternalStoragePath() + "/ARFurniture"))
+        if (!File.Exists(GetAndroidExternalStoragePath() + "/AbdElKarim_ARKitchen"))
         {
-            Directory.CreateDirectory(GetAndroidExternalStoragePath() + "/ARFurniture");
+            Directory.CreateDirectory(GetAndroidExternalStoragePath() + "/AbdElKarim_ARKitchen");
         }
 
     }
     public void CaptureScreenshot()
     {
+        //material = objectSpawner.LastCreatedObject.GetComponentInChildren<MeshRenderer>().materials[0]; 
+        objectSpawner.LastCreatedObject = null;
         StartCoroutine("TakeAndSaveScreenshot");
     }
 
     private IEnumerator TakeAndSaveScreenshot()
     {
+      
         RightPanel.SetActive(false);
         PlacementIndicator.SetActive(false);
-
+        InformationsPanel.SetActive(true);
         string timeStamp = System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss");
         yield return new WaitForEndOfFrame();
         Texture2D ss = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
         ss.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
         ss.Apply();
-        string filePath = Path.Combine(GetAndroidExternalStoragePath() + "/ARFurniture", "ARFurniture" + timeStamp + ".png");
+        string filePath = Path.Combine(GetAndroidExternalStoragePath() + "/AbdElKarim_ARKitchen", timeStamp + ".png");
         File.WriteAllBytes(filePath, ss.EncodeToPNG());
         refersh(filePath);
-        blink.SetActive(true);
         Destroy(ss);
-        blink.GetComponent<DestroyBlink>().disableBlink();
+        blink.SetActive(true);
         RightPanel.SetActive(true);
         PlacementIndicator.SetActive(true);
-
+        InformationsPanel.SetActive(false);
+        blink.GetComponent<DestroyBlink>().disableBlink();
+        //colorSwitchManager.switchToMaterial(material);
     }
 
 

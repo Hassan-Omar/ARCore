@@ -21,7 +21,7 @@ public class DragDropManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.touchCount ==2 )
+        if (Input.touchCount > 0)
         {
 
             if (!IsPointerOverUIObject())
@@ -53,7 +53,7 @@ public class DragDropManager : MonoBehaviour
 
         if(onTouchHold)
         {
-            if(arRaycatManager.Raycast(touchPosition,hits,TrackableType.Planes))
+            if(arRaycatManager.Raycast(touchPosition,hits,TrackableType.PlaneWithinPolygon))
             {
                 Pose hitPose = hits[0].pose; 
                 if(objectSpawner.LastCreatedObject !=null)

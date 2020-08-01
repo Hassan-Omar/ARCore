@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -52,7 +51,8 @@ public class SelectObject : MonoBehaviour
                     }
                 }
             }
-            else if (touch.phase == TouchPhase.Ended)
+
+            if (touch.phase == TouchPhase.Ended)
             {
                 if (objectSpawner.LastCreatedObject != null)
                 {
@@ -71,12 +71,7 @@ public class SelectObject : MonoBehaviour
         }
     }
 
-    IEnumerator resetModelMaterial()
-    {
-        yield return new WaitForSeconds(1f);
-        colorManager.switchToMaterial(selectedObjPrvMaterial);
-    }
-
+    
     // Function to check if WE Clicking On UI elemet 
     private bool IsPointerOverUIObject()
     {

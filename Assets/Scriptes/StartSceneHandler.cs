@@ -33,4 +33,14 @@ public class StartSceneHandler : MonoBehaviour
     {
         SceneManager.LoadSceneAsync("Tutorial");
     }
+    public void openMeaser()
+    {
+        SceneManager.LoadSceneAsync("Measurement");
+    }
+
+    public void shareMessage()
+    {
+        var Txt = "ياصديقى\r\n Check this App \r\n تفدر من خلاله تصمم مطبخك \r\n  https://play.google.com/store/apps/details?id=com.abdelkarim.arkitchen";
+        new NativeShare().SetText(Txt).Share(); 
+    }
 }
